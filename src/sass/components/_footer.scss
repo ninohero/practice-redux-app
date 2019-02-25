@@ -1,0 +1,36 @@
+footer {
+  margin-top: rem-calc(115px);
+  background-color: $lightest-grey;
+  border-top: rem-calc(1px) solid $almost-lightest-grey;
+  color: $lighter-grey;
+  font-family: "EYBold", Arial;
+  font-size: rem-calc(11px);
+  padding: rem-calc(11px 22px);
+  position: static;
+  //width: 100%;
+  // -webkit-animation: fadeIn 1s;
+  // -moz-animation: fadeIn 1s;
+  // -o-animation: fadeIn 1s;
+  // animation: fadeIn 1s;
+  // @include breakpoint('medium') {
+  //   opacity: 0;
+  //   display:none;
+  // }
+    li {
+      &.current {
+        background: #644a6e;
+      }
+      &.projects a:before {
+        content: "\f03a";
+      }
+      &.reports a:before {
+        content: "\f15c";
+      }
+      &.about a:before {
+        content: "\f05a";
+      }
+      &.profile a:before {
+        content: "\f007";
+    }
+  }
+}

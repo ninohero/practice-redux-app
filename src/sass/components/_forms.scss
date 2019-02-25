@@ -1,0 +1,106 @@
+form {
+  label {
+    float: left;
+  }
+  select, input {
+    background-color: $form-grey;
+    border: solid 1px #dfdfdf;
+    padding: rem-calc(20 10 14 10);
+    margin: rem-calc(5 0);
+    width: auto;
+    height: 55px;
+    display: inline-block;
+    font-size: 1rem;
+  }
+  input {
+    padding: rem-calc(14.5 10);
+    font-size: 1rem;
+    width: 100%;
+    &:focus {
+      &::-webkit-input-placeholder {
+        transition: opacity 0.5s 0.5s ease;
+        // transform: translate(0,-10px);
+        opacity: 0;
+      }
+      &:-moz-placeholder {
+        color: red;
+      }
+      input[placeholder] {
+        color: red;
+      }
+    }
+    & + span {
+      position: relative;
+      display: block;
+      &.check:after {
+        content: "\f00c";
+        font-family: FontAwesome;
+        position: absolute;
+        right: 3%;
+        top: 50%;
+        display: block;
+        color: green;
+        font-size: 30px;
+        margin-top: -50px;
+      }
+    }
+  }
+  input[type="radio"] {
+    float: left;
+    margin-right: 5px;
+    width: auto;
+  }
+  .btn-footer {
+    margin-top: rem-calc(15);
+    a {
+      margin-left: rem-calc(15);
+    }
+    button {
+      width: 100%;
+      margin-bottom: 20px;
+      @include breakpoint(small) {
+        width: auto;
+        margin-bottom: 0;
+      }
+    }
+  }
+  .field-container {
+    display: inline-block;
+    position: relative;
+    label {
+      position: absolute;
+      font-size: .7rem;
+      top: 3px;
+      left: 10px;
+      z-index: 10;
+    }
+  }
+  .deliverables_col .field-container label {
+    margin-left: 15px;
+}
+}
+
+.summary.table {
+  background: $super-lightest-grey;
+  td {
+    border-top: rem-calc(2) solid #fff;
+    border-right: rem-calc(2) solid #fff;
+    margin: .1em;
+  }
+  th {
+    background: #fff;
+    border-top: none;
+    border-right: rem-calc(2) solid #fff;
+    border-bottom: 2px solid #000;
+  }
+}
+
+.summary-info, .financial-summary {
+    tr:first-of-type {
+      border-top: rem-calc(3) solid #000;
+    }
+}
+
+.summary-text {
+  background: $super-lightest-grey;
+}

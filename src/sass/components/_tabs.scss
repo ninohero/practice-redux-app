@@ -1,0 +1,50 @@
+ul.tabs{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    margin: rem-calc(0 10);
+    li {
+      background: none;
+      color: #222;
+      display: inline-block;
+      padding: rem-calc(10 15);
+      cursor: pointer;
+      h3 {
+        color: #60b9ff;
+      }
+      &.current{
+        background: $white;
+        color: #222;
+        h3 {
+          color: inherit;
+        }
+      }
+    }
+  }
+.tab-content {
+  opacity: 0;
+  background: $white;
+  height: 0;
+  visibility: hidden;
+  &.current {
+    opacity: 1;
+    padding: rem-calc(20);
+    height: auto;
+    visibility: visible;
+    @include trans(visibility 100ms linear, opacity 500ms linear);
+    p {
+      line-height: inherit;
+    }
+  }
+}
+.tabs-wrapper {
+  background: rgba(40, 95, 142, .8);
+  h1,
+  p {
+    color: $white;
+    padding-left: rem-calc(10);
+  }
+  h1 {
+    padding-top: rem-calc(10);
+  }
+}

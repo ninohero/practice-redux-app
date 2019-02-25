@@ -1,0 +1,37 @@
+.container {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+// /* this just clears the header since clearfix isn't working (pry becasue position fixed)*/
+// .page-container {
+//   margin-top: 91px;
+// }
+header {
+  background-color: $darker-grey;
+  border-bottom: 4px solid $tanish;
+  clear: both;
+  color: $white;
+  display: flex;
+  justify-content: space-between;
+
+  .home-page & {
+    padding: 0;
+    .app-logo {
+      padding: 0;
+    }
+  }
+  .app-logo {
+    padding: rem-calc(38 15 10);
+  }
+}
+
+.route--active {
+  font-weight: bold;
+  text-decoration: underline;
+  background: #000;
+  color: #fff !important;   
+}
+
+.project-header {
+  margin: 2rem 0 .75rem;
+}

@@ -4,8 +4,11 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "formsy-react": "^1.1.5",
+    "formsy-react-components": "^1.0.0",
     "immutable": "^4.0.0-rc.12",
     "react": "^16.8.3",
+    "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.8.3",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
@@ -17,7 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-css": "node-sass --include-path src/sass/base.scss src/index.css"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -31,6 +35,8 @@
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.14.1"
+    "eslint": "^5.14.1",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0"
   }
 }

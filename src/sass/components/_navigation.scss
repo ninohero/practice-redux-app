@@ -1,0 +1,28 @@
+.main-nav {
+    display: flex;
+    align-items: flex-end;
+    a {
+      padding: rem-calc(70 15 15 15);
+      font-size: rem-calc(16);
+      color: #777f86;
+      text-decoration: none;
+      border-left: rem-calc(1) solid #5b5d57;
+      &:before {
+        font-family: FontAwesome;
+        display: block;
+      }
+      &:hover {
+        transition: color $timing ease-in-out;
+        color: #fff;
+      }
+  }
+
+  footer & {
+    li {
+      width: 25%;
+    }
+    span {
+      display: none;
+    }
+  }
+}

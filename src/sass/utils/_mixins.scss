@@ -1,0 +1,240 @@
+
+//function to calculate in rems.
+// It strips the unit of measure and returns it
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+@function convert-to-rem($value, $base-value: $rem-base)  {
+  $value: strip-unit($value) / strip-unit($base-value) * 1em;
+  @if ($value == 0em) { $value: 0; } // Turn 0em into 0
+  @return $value;
+}
+
+@function rem-calc($values, $base-value: $rem-base) {
+  $max: length($values);
+
+  @if $max == 1 { @return convert-to-rem(nth($values, 1), $base-value); }
+
+  $remValues: ();
+  @for $i from 1 through $max {
+    $remValues: append($remValues, convert-to-rem(nth($values, $i), $base-value));
+  }
+  @return $remValues;
+}
+///////
+
+@mixin trans($val...) {
+   -webkit-transition: $val;
+   -moz-transition: $val;
+   -o-transition: $val;
+   transition: $val;
+}
+@mixin box-shadow($args...) {
+  -webkit-box-shadow: $args;
+  -moz-box-shadow: $args;
+  box-shadow: $args;
+}
+
+@mixin breakpoint($name) {
+ @if map-has-key($breakpoints, $name) {
+   @media #{inspect(map-get($breakpoints, $name))} {
+     @content;
+   }
+ } @else {
+   @warn "Couldn't find a breakpoint named `#{$name}`.";
+ }
+}
+
+@-webkit-keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+// util margin classes - from:
+//  https://github.com/gkcgautam/sass-css-utilities/blob/master/sass-css-utilities/utils/_margin.scss
+@mixin auto-generate-margins($values, $prefix:"") {
+
+    // Margin alllll
+    @each $val in $values{
+
+        .mar-#{$val}{
+            margin: #{$val}px;
+        }
+    }
+
+    // Margin top, bottom and vertical
+    @each $val in $bc-margins {
+
+        .mt-#{$val},
+        .mv-#{$val}{
+            margin-top: #{$val}px;
+        }
+
+        .mb-#{$val},
+        .mv-#{$val}{
+            margin-bottom: #{$val}px;
+        }
+        @media (max-width: $screen-xs-max) {
+          .mb-mobile-#{$val},
+          .mv-mobile-#{$val}{
+              margin-bottom: #{$val}px;
+          }
+          .mt-#{$val},
+          .mv-#{$val}{
+              margin-top: #{$val}px;
+          }
+        }
+        @media (min-width: $screen-xs-max) {
+          .mb-desktop-#{$val},
+          .mv-desktop-#{$val},
+          .mb-sm-#{$val},
+          .mv-sm-#{$val}{
+              margin-bottom: #{$val}px;
+          }
+          .mt-#{$val},
+          .mv-#{$val},
+          .mt-sm-#{$val},
+          .mv-sm-#{$val}{
+              margin-top: #{$val}px;
+          }
+        }
+        @media print {
+          .mb-print-#{$val},
+          .mv-print-#{$val}{
+              margin-bottom: #{$val}px;
+          }
+          .mt-print-#{$val},
+          .mv-print-#{$val}{
+              margin-top: #{$val}px;
+          }
+        }
+
+    }
+
+    // Margin left, right and horizontal
+    @each $val in $values {
+
+        .ml-#{$val},
+        .mh-#{$val}{
+            margin-left: #{$val}px;
+        }
+
+        .mr-#{$val},
+        .mh-#{$val}{
+            margin-right: #{$val}px;
+        }
+        @media (max-width: $screen-xs-max) {
+          .ml-mobile-#{$val},
+          .mh-mobile-#{$val}{
+              margin-left: #{$val}px;
+          }
+
+          .mr-mobile-#{$val},
+          .mh-mobile-#{$val}{
+              margin-right: #{$val}px;
+          }
+        }
+    }
+}
+
+// General margin classes
+
+    .ma,
+    .mar-auto {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .ml-a, .ml-auto { margin-left: auto; }
+    .mr-a, .mr-auto { margin-right: auto; }
+
+// Auto generated margin classes
+
+@include auto-generate-margins($bc-margins);
+//----------------------------------auto generate Padding classes ---------------------------
+@mixin auto-generate-paddings($values, $prefix:"") {
+
+    // Padding all
+    @each $val in $values {
+
+        .pad-#{$val}{
+            padding: #{$val}px;
+        }
+    }
+
+    // Padding top, bottom and vertical
+    @each $val in $values {
+
+        .pt-#{$val},
+        .pv-#{$val}{
+            padding-top: #{$val}px;
+        }
+
+        .pb-#{$val},
+        .pv-#{$val}{
+            padding-bottom: #{$val}px;
+        }
+
+        @media (max-width: $screen-xs-max) {
+          .pt-mobile-#{$val},
+          .pv-mobile-#{$val}{
+              padding-top: #{$val}px;
+          }
+
+          .pb-mobile-#{$val},
+          .pv-mobile-#{$val}{
+              padding-bottom: #{$val}px;
+          }
+        }
+    }
+
+    // Padding left, right and horizontal
+    @each $val in $values {
+
+        .pl-#{$val},
+        .ph-#{$val}{
+            padding-left: #{$val}px;
+        }
+
+        .pr-#{$val},
+        .ph-#{$val}{
+            padding-right: #{$val}px;
+        }
+        @media (max-width: $screen-xs-max) {
+          .pl-mobile-#{$val},
+          .ph-mobile-#{$val}{
+              padding-left: #{$val}px;
+          }
+
+          .pr-mobile-#{$val},
+          .ph-mobile-#{$val}{
+              padding-right: #{$val}px;
+          }
+        }
+    }
+}
+
+// Auto generated padding classes
+
+@include auto-generate-paddings($bc-paddings, $prefix: "");
+
+// this is the same as bootstraps's but the default one isn't working
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.clearfix {
+    @include clearfix();
+}

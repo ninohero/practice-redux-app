@@ -1,19 +1,16 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
 import NytSearch from './containers/NytSearch';
 import People from './containers/People';
-import logo from './logo.svg';
-import './App.css';
+import './src/sass/base.scss';
 
 const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-    </header>
+  <Container>
+    <Route path='/' component={NytSearch} />>
     <Route path='search' component={NytSearch} />
     <Route path='results' component={People}/>
-    <button onClick={(e) => this.getArticles(e)}>Load Articles</button>
-  </div>
+  </Container>
 );
 
 export default App;
