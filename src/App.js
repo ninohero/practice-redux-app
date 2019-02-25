@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import NytSearch from './containers/NytSearch';
 import People from './containers/People';
-import './src/sass/base.scss';
+import './sass/base.scss';
 
 const App = () => (
   <Container>
