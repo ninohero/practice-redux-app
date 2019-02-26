@@ -6,10 +6,10 @@ import People from './containers/People';
 //import './sass/base.css';
 
 const App = () => (
-  <div>
-    <div className="header text-center">
+  <div className="home-page">
+    <header className="header text-center">
       <h1>API here</h1>
-    </div>
+    </header>
     <Container className="container-fluid">
       <Route path='/' component={NytSearch} />
       <Route path='search' component={NytSearch} />

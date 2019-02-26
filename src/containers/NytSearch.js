@@ -32,9 +32,9 @@ class NytSearch extends Component {
 
   createCell = (data) => {
     return (
-      <Link to={data.web_url} className="col-3-lg">
+      <a href={data.web_url} target="_outerWin" className="col-3-lg">
         <p>{data.headline && data.headline.main ? data.headline.main : 'No Headline'}</p>
-      </Link>
+      </a>
     );
   }
 
