@@ -7,13 +7,12 @@ const initialState = fromJS({articles: [], reviews: []});
 export default (state = initialState, action) => {
   switch (action.type) {
     case types.GET_ARTICLES_REQUEST:
-      return state;
+      return state.setIn(['loading'], true);
     case types.GET_ARTICLES_SUCCESS:
-      return {
-        results: fromJS(action.payload)
-      };
+      const articles = action.payload.response.response.docs && action.payload.response.response.docs.length ? action.payload.response.response.docs : [{headline: 'Nothing found'}];
+      return state.setIn(['articles'], articles); //setIn(['loading'], false);
     case types.GET_ARTICLES_FAILURE:
-      return action.payload.err;
+      return state.setIn(['errors'], action.payload);
     default:
       return state;
   }

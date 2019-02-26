@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { simpleAction } from '../actions/actions';
 
 class People extends Component {
   constructor(props) {
@@ -46,7 +45,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  simpleAction: () => dispatch(simpleAction())
+  //simpleAction: () => dispatch(simpleAction())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(People);

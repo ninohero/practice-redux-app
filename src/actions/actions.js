@@ -1,22 +1,16 @@
 import * as types from './actionConsts';
 import axios from 'axios';
 
-export const simpleAction = () => dispatch => {
-  dispatch({
-   type: 'SIMPLE_ACTION',
-   payload: 'result_of_simple_action'
-  })
-}
-
-const uri = '';
-const key = 'e7417f1b-d25e-4c23-b20d-ea0fca9cc8af';
+const uri = 'https://api.nytimes.com/';
+const appId = 'e7417f1b-d25e-4c23-b20d-ea0fca9cc8af';
+const key = 'jBspI9S6yoBRGB1JbdGmW5pHKUldsilM';
 
 export const getArticles = (params) => {
   return dispatch => {
     dispatch(getArticlesRequest());
 
     // /2019/1 => year, month?
-    axios.get(uri + '/v1/svc/archive/' + params.join('/') + '.json?api-key=' + key,{
+    axios.get(uri + 'svc/archive/v1/' + params.year + '/' + params.month + '.json?api-key=' + key,{
       ...params
     })
       .then(res => {
@@ -32,17 +26,17 @@ const getArticlesRequest = () => ({
   type: types.GET_ARTICLES_REQUEST
 });
 
-const getArticlesSuccess = results => ({
+const getArticlesSuccess = response => ({
   type: types.GET_ARTICLES_SUCCESS,
   payload: {
-    ...results
+    response
   }
 });
 
-const getArticlesFailure = err => ({
+const getArticlesFailure = response => ({
   type: types.GET_ARTICLES_FAILURE,
   payload: {
-    ...err
+    response
   }
 });
 
