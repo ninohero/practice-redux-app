@@ -88,49 +88,55 @@ class NytSearch extends Component {
 
   render() {
     return (
-      <Row className='searchContainer'>
-        <h3>Search Archives</h3>
-        <Col className='col-6-lg col-12-sm'>
-          <Form onValidSubmit={this.handleSubmit} onValid={this.formIsValid} onInvalid={this.formIsInvalid}>
-            <Select
-              className="float-l"
-              label="Month"
-              name="month"
-              onChange={this.handleChangeArticleSearch}
-              placeholder="select"
-              required={true}
-              options={[
-                {label: 'Month', value: ''},
-                {label: '1', value: '1'},
-                {label: '2', value: '2'},
-                {label: '3', value: '3'},
-                {label: '4', value: '4'},
-                {label: '5', value: '5'},
-                {label: '6', value: '6'},
-                {label: '7', value: '7'},
-                {label: '8', value: '8'},
-                {label: '9', value: '9'},
-                {label: '10', value: '10' },
-                {label: '11', value: '11'},
-                {label: '12', value: '12'}
-              ]} />
+      <div className='searchContainer'>
+        <Row>
+          <Col className="col-12-lg">
+            <h3 className="text-align-center">Search Archives</h3>
+          </Col>
+        </Row>
+        <Row>
+          <Col className='col-12-lg col-12-sm'>
+            <Form onValidSubmit={this.handleSubmit} onValid={this.formIsValid} onInvalid={this.formIsInvalid}>
+              <Select
+                className="float-l col-6-lg"
+                label="Month"
+                name="month"
+                onChange={this.handleChangeArticleSearch}
+                placeholder="select"
+                required={true}
+                options={[
+                  {label: 'Month', value: ''},
+                  {label: '1', value: '1'},
+                  {label: '2', value: '2'},
+                  {label: '3', value: '3'},
+                  {label: '4', value: '4'},
+                  {label: '5', value: '5'},
+                  {label: '6', value: '6'},
+                  {label: '7', value: '7'},
+                  {label: '8', value: '8'},
+                  {label: '9', value: '9'},
+                  {label: '10', value: '10' },
+                  {label: '11', value: '11'},
+                  {label: '12', value: '12'}
+                ]} />
 
-            <Select options={this.getYears()}
-              className="float-l"
-              label="Year"
-              name="year"
-              required={true}
-              onChange={this.handleChangeArticleSearch} />
+              <Select options={this.getYears()}
+                className="float-l"
+                label="Year"
+                name="year"
+                required={true}
+                onChange={this.handleChangeArticleSearch} />
 
-            <Button variant="primary"
-              disabled={!this.state.formIsValid}
-              onClick={this.handleSubmit}>Search</Button>
-          </Form>
-        </Col>
-        <Col className='col-12-lg col-12-sm'>
-          { this.props.articles && this.listArticles(this.props.articles) }
-        </Col>
-      </Row>
+              <Button variant="primary"
+                disabled={!this.state.formIsValid}
+                onClick={this.handleSubmit}>Search</Button>
+            </Form>
+          </Col>
+          <Col className='col-12-lg col-12-sm'>
+            { this.props.articles && this.listArticles(this.props.articles) }
+          </Col>
+        </Row>
+      </div>
     );
   }
 }

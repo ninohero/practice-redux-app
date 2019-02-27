@@ -15,16 +15,15 @@
     .float-left {
       padding: rem-calc(20 0 20 10);
     }
+    h1,
+    p {
+      color: $white;
+    }
   }
   .container {
     margin: rem-calc(0 10);
-    color: $white;
     h2 {
       margin-bottom: rem-calc(60);
-      color: $white;
-    }
-    h1,
-    p {
       color: $white;
     }
   }
