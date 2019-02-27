@@ -18,6 +18,7 @@ class NytSearch extends Component {
         year: '',
         month: ''
       },
+      critics: [],
       formIsValid: false,
       search: {
         query: ''
@@ -28,6 +29,12 @@ class NytSearch extends Component {
     this.handleChangeArticleSearch = this.handleChangeArticleSearch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.listArticles = this.listArticles.bind(this);
+  }
+
+  componentDidMount = () => {
+    const critics = this.props.actions.getMovieCritics();
+
+    this.setState({ critics });
   }
 
   createCell = (data) => {
@@ -48,6 +55,10 @@ class NytSearch extends Component {
 
   getArticles = (e) => {
     this.props.actions.getArticles(this.state.articles);
+  }
+
+  getCriticOptions = (opts) => {
+
   }
 
   getYears = () => {
@@ -88,17 +99,17 @@ class NytSearch extends Component {
 
   render() {
     return (
-      <div className='searchContainer'>
+      <div className='search-container'>
         <Row>
           <Col className="col-12-lg">
             <h3 className="text-align-center">Search Archives</h3>
           </Col>
         </Row>
         <Row>
-          <Col className='col-12-lg col-12-sm'>
+          <Col className='col-6-lg'>
             <Form onValidSubmit={this.handleSubmit} onValid={this.formIsValid} onInvalid={this.formIsInvalid}>
               <Select
-                className="float-l col-6-lg"
+                className="col-6-lg"
                 label="Month"
                 name="month"
                 onChange={this.handleChangeArticleSearch}
@@ -121,7 +132,7 @@ class NytSearch extends Component {
                 ]} />
 
               <Select options={this.getYears()}
-                className="float-l"
+                className="col-6-lg"
                 label="Year"
                 name="year"
                 required={true}
@@ -132,8 +143,49 @@ class NytSearch extends Component {
                 onClick={this.handleSubmit}>Search</Button>
             </Form>
           </Col>
-          <Col className='col-12-lg col-12-sm'>
+
+          <Col className='col-6-lg results'>
             { this.props.articles && this.listArticles(this.props.articles) }
+          </Col>
+        </Row>
+
+        <Row>
+          <Col className="col-12-lg">
+            <h3 className="text-align-center">Movie Reviews</h3>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col className='col-6-lg'>
+            <Form onValidSubmit={this.handleSubmit} onValid={this.formIsValid} onInvalid={this.formIsInvalid}>
+              <Select
+                className="col-6-lg"
+                label="Critics"
+                name="critic"
+                onChange={this.handleChangeCritics}
+                placeholder="select"
+                required={true}
+                options={this.state.critics ? this.getCriticOptions(this.state.critics) : [{ label: 'Loading', value: ''}]} />
+
+              <Select options={this.getYears()}
+                className="col-6-lg"
+                label="Year"
+                name="year"
+                required={true}
+                onChange={this.handleChangeArticleSearch} />
+
+              <Button variant="primary"
+                disabled={!this.state.formIsValid}
+                onClick={this.handleSubmit}>Search</Button>
+            </Form>
+          </Col>
+
+          <Col className='col-6-lg results'>
+            {this.props.critics && this.listCritics(this.props.critics) }
+
+            { this.props.results && this.listResults(this.props.results) }
+
+            {this.props.picks && this.listPicks(this.props.picks) }
           </Col>
         </Row>
       </div>

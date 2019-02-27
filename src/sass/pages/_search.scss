@@ -1,0 +1,36 @@
+.search-container {
+
+}
+
+.results {
+  height: 250px;
+  overflow: scroll;
+}
+
+// general layout
+.content {
+    position: relative;
+    top: 91px;
+}
+.list-view {
+  clear: both;
+}
+.mainContainer {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.page-container {
+  font-family: tahoma, arial;
+}
