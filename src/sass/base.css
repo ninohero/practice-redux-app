@@ -905,8 +905,9 @@
 
 .row [class^="col"] {
   float: left;
-  margin: 0.5rem 2%;
-  min-height: 0.125rem; }
+  margin: 0.5rem 0;
+  min-height: 0.125rem;
+  padding: 0 15px; }
 
 .row::after {
   content: "";
@@ -1092,10 +1093,6 @@ button:disabled:hover {
 .btn-light-grey:disabled {
   background: #b2b2b2; }
 
-.container {
-  margin: 0 !important;
-  padding: 0 !important; }
-
 header {
   background-color: #333;
   border-bottom: 4px solid #bfbfbf;
@@ -1127,19 +1124,18 @@ header .app-logo {
   align-items: flex-end; }
 
 .main-nav a {
-  padding: 4.375em 0.9375em 0.9375em 0.9375em;
+  color: #337337 !important;
+  padding: 0.625em 0.625em 0.9375em 0.625em;
   font-size: 1em;
   color: #777f86;
-  text-decoration: none;
-  border-left: 0.0625em solid #5b5d57; }
+  text-decoration: none; }
 
 .main-nav a:before {
   font-family: FontAwesome;
   display: block; }
 
 .main-nav a:hover {
-  transition: color 360ms ease-in-out;
-  color: #fff; }
+  transition: color 360ms ease-in-out; }
 
 footer .main-nav li {
   width: 25%; }
@@ -1209,7 +1205,7 @@ form select, form input {
   padding: 1.25em 0.625em 0.875em 0.625em;
   margin: 0.3125em 0;
   width: auto;
-  height: 55px;
+  height: 30px;
   display: inline-block;
   font-size: 1rem; }
 
@@ -1353,35 +1349,9 @@ footer li.profile a:before {
   color: #000 !important;
   font-weight: bold; }
 
-.home-page {
-  background: url("/images/splash_bg.png") no-repeat 50% 50% fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  min-height: 100vh; }
-
-.home-page header .float-right div {
-  background: #2d4455;
-  padding: 1.25em; }
-
-.home-page header .float-left {
-  padding: 1.25em 0 1.25em 0.625em; }
-
-.home-page .container {
-  margin: 0 0.625em;
-  color: #fff; }
-
-.home-page .container h2 {
-  margin-bottom: 3.75em;
-  color: #fff; }
-
-.home-page .container h1,
-.home-page .container p {
-  color: #fff; }
-
-.targetBlock {
-  position: absolute; }
+.results {
+  height: 250px;
+  overflow: scroll; }
 
 .content {
   position: relative;
@@ -1400,9 +1370,6 @@ footer li.profile a:before {
 
 .clearfix:after {
   clear: both; }
-
-.project-header h1 .btn {
-  float: none; }
 
 .page-container {
   font-family: tahoma, arial; }
