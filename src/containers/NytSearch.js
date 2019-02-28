@@ -59,28 +59,6 @@ class NytSearch extends Component {
       </li>
     );
   }
-  /*
-  byline: "MANOHLA DARGIS"
-  critics_pick: 1
-  date_updated: "2019-02-28 17:44:26"
-  display_title: "Transit"
-  headline: "‘Transit’ Review: An Existential Puzzler With Jackboots and Terror"
-  link: {
-    suggested_link_text: "Read the New York Times Review of Transit"
-    type: "article"
-    url: "http://www.nytimes.com/2019/02/28/movies/transit-review.html"
-  }
-  mpaa_rating: ""
-  multimedia: {
-    height: 140
-    src: "https://static01.nyt.com/images/2019/03/01/arts/01transit-1/merlin_151114074_8ed6b18b-cd05-4722-bc05-f8106c8c547d-mediumThreeByTwo210.jpg"
-    type: "mediumThreeByTwo210"
-    width: 210
-  }
-  opening_date: "2019-03-01"
-  publication_date: "2019-02-28"
-  summary_short: "In the latest from the German director Christian Petzold, a German refugee dodges bullets as German soldiers swarm into present-day Paris."
-  */
 
   displayErrorModal = (message) => {
     //this.setState({ errorIsOpen: true });
