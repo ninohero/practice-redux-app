@@ -1318,36 +1318,29 @@ footer li.about a:before {
 footer li.profile a:before {
   content: "\f007"; }
 
-.progressBar h6 {
-  font-size: 0.75em; }
-
-.progressBar a {
-  color: #d3d3d3;
-  text-decoration: none;
-  transition: color 360ms ease-in-out; }
-
-.progressBar ul {
+.test-fb {
+  list-style-type: none;
   display: flex;
+  flex-flow: row wrap;
+  /*flex-direction flex-wrap shorthand*/
   justify-content: space-around;
-  margin-top: 1em;
-  width: 55vw;
-  padding-left: 0; }
+  align-content: flex-start; }
 
-.progressBar li {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  flex: 1 1 0.125em;
-  list-style: none;
-  text-align: center; }
+.test-fb li {
+  width: 100px;
+  height: 100px;
+  background-color: #8cacea;
+  margin: 8px;
+  flex-grow: 1; }
 
-.progressBar li:nth-child(3) {
-  flex: 2 2 0.625em; }
+.test-fb li:nth-child(1) {
+  order: 1; }
 
-.active-route--breadCrumb {
-  color: #000 !important;
-  font-weight: bold; }
+.test-fb li:nth-child(2) {
+  order: 3; }
+
+.test-fb li:nth-child(4) {
+  order: 2; }
 
 .results {
   height: 250px;
