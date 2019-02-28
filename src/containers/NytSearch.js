@@ -35,18 +35,52 @@ class NytSearch extends Component {
   }
 
   componentDidMount = () => {
-    const critics = this.props.actions.getMovieCritics();
-
-    this.setState({ critics });
+    this.props.actions.getMovieCritics();
+    this.props.actions.getPicks();
   }
 
   createCell = (data) => {
     return (
-      <a href={data.web_url} target="_outerWin" className="col-3-lg">
-        <p>{data.headline && data.headline.main ? data.headline.main : 'No Headline'}</p>
-      </a>
+      <li>
+        <a href={data.web_url} target="_outerWin" className="col-3-lg">
+          {data.headline && data.headline.main ? data.headline.main : 'No Headline'}
+        </a>
+      </li>
     );
   }
+
+  createPickCell = (data, i) => {
+    return (
+      <li>
+        <a href={data.link.url} target="_outerWin">
+          <img src={data.multimedia.src} />
+          <strong>{data.display_title}</strong>
+        </a>
+      </li>
+    );
+  }
+  /*
+  byline: "MANOHLA DARGIS"
+  critics_pick: 1
+  date_updated: "2019-02-28 17:44:26"
+  display_title: "Transit"
+  headline: "‘Transit’ Review: An Existential Puzzler With Jackboots and Terror"
+  link: {
+    suggested_link_text: "Read the New York Times Review of Transit"
+    type: "article"
+    url: "http://www.nytimes.com/2019/02/28/movies/transit-review.html"
+  }
+  mpaa_rating: ""
+  multimedia: {
+    height: 140
+    src: "https://static01.nyt.com/images/2019/03/01/arts/01transit-1/merlin_151114074_8ed6b18b-cd05-4722-bc05-f8106c8c547d-mediumThreeByTwo210.jpg"
+    type: "mediumThreeByTwo210"
+    width: 210
+  }
+  opening_date: "2019-03-01"
+  publication_date: "2019-02-28"
+  summary_short: "In the latest from the German director Christian Petzold, a German refugee dodges bullets as German soldiers swarm into present-day Paris."
+  */
 
   displayErrorModal = (message) => {
     //this.setState({ errorIsOpen: true });
@@ -69,7 +103,15 @@ class NytSearch extends Component {
   }
 
   getCriticOptions = (opts) => {
+    const options = [];
+    _.map(opts, (critic, i) => {
+      options.push({ label: critic.display_name, value: critic.seo_name });
+    });
+    return options;
+  }
 
+  getPicks = () => {
+    this.props.actions.getPicks();
   }
 
   getYears = () => {
@@ -107,6 +149,21 @@ class NytSearch extends Component {
       }
     });
     return cells;
+  }
+
+  listResults = (results) => {
+
+  }
+
+  listPicks = (picks) => {
+    const cells = [];
+    if (picks.toJSON) {
+      picks = picks.toJSON();
+    }
+    _.map(picks, (pick, i) => {
+      cells.push(this.createPickCell(pick, i));
+    });
+    return (cells);
   }
 
   searchNyt = (e) => {
@@ -184,7 +241,7 @@ class NytSearch extends Component {
                 onChange={this.handleChangeCritics}
                 placeholder="select"
                 required={true}
-                options={this.state.critics ? this.getCriticOptions(this.state.critics) : [{ label: 'Loading', value: ''}]} />
+                options={this.state.critics ? this.getCriticOptions(this.props.critics) : [{ label: 'Loading', value: ''}]} />
 
               <Select options={this.getYears()}
                 className="col-6-lg"
@@ -200,25 +257,16 @@ class NytSearch extends Component {
           </Col>
 
           <Col className='col-6-lg results'>
-            {this.props.critics && this.listCritics(this.props.critics) }
-
             { this.props.results && this.listResults(this.props.results) }
-
-            {this.props.picks && this.listPicks(this.props.picks) }
           </Col>
         </Row>
-
-        <ul className="test-fb">
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-          <li>5</li>
-          <li>6</li>
-          <li>7</li>
-          <li>8</li>
-          <li>9</li>
-        </ul>
+        <Row>
+          <Col className="col-12-lg">
+            { this.props.picks ?
+              <ul className="picks-list">{this.listPicks(this.props.picks)}</ul>
+              : [] }
+          </Col>
+        </Row>
       </div>
     );
   }
@@ -227,6 +275,8 @@ class NytSearch extends Component {
 const mapStateToProps = state => {
   return {
     articles: state.reducers.toJSON().articles,
+    critics: state.reducers.toJSON().critics,
+    picks: state.reducers.toJSON().picks,
     error: state.reducers.toJSON().error
   };
 };
