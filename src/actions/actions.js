@@ -184,3 +184,7 @@ const searchReviewsFailure = err => ({
     ...err
   }
 });
+
+export const clearErrors = () => ({
+  type: types.CLEAR_ERRORS
+});

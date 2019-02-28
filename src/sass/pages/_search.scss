@@ -1,7 +1,29 @@
 .search-container {
 
 }
-
+.test-fb {
+  list-style-type: none;
+  display: flex;
+  flex-flow: row wrap;  /*flex-direction flex-wrap shorthand*/
+  justify-content: space-around;
+  align-content: flex-start;
+  li {
+    width: 100px;
+    height: 100px;
+    background-color: #8cacea;
+    margin: 8px;
+    flex-grow: 1;
+    &:nth-child(1) {
+      order: 1;
+    }
+    &:nth-child(2) {
+      order: 3;
+    }
+    &:nth-child(4) {
+      order: 2;
+    }
+  }
+}
 .results {
   height: 250px;
   overflow: scroll;

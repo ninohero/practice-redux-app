@@ -4,6 +4,7 @@ import { Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Formsy from 'formsy-react';
 import { Form, Checkbox, CheckboxGroup, File, Input, RadioGroup, Select, Textarea } from 'formsy-react-components';
+import ErrorModal from '../components/ErrorModal';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as projectActions from '../actions/actions';
@@ -19,6 +20,7 @@ class NytSearch extends Component {
         month: ''
       },
       critics: [],
+      errorIsOpen: false,
       formIsValid: false,
       search: {
         query: ''
@@ -27,6 +29,7 @@ class NytSearch extends Component {
 
     this.getArticles = this.getArticles.bind(this);
     this.handleChangeArticleSearch = this.handleChangeArticleSearch.bind(this);
+    this.handleClearError = this.handleClearError.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.listArticles = this.listArticles.bind(this);
   }
@@ -42,6 +45,14 @@ class NytSearch extends Component {
       <a href={data.web_url} target="_outerWin" className="col-3-lg">
         <p>{data.headline && data.headline.main ? data.headline.main : 'No Headline'}</p>
       </a>
+    );
+  }
+
+  displayErrorModal = (message) => {
+    //this.setState({ errorIsOpen: true });
+    return (
+      <ErrorModal errorMessage={message}
+        handleCloseModal={this.handleClearError} />
     );
   }
 
@@ -76,6 +87,11 @@ class NytSearch extends Component {
     this.setState({ articles: vals });
   }
 
+  handleClearError = () => {
+    this.setState({ errorIsOpen: false });
+    this.props.actions.clearErrors();
+  }
+
   handleSubmit = (e) => {
     this.props.actions.getArticles(this.state.articles);
   }
@@ -100,6 +116,9 @@ class NytSearch extends Component {
   render() {
     return (
       <div className='search-container'>
+        { this.props.error ?
+          this.displayErrorModal(this.props.error)
+          : [] }
         <Row>
           <Col className="col-12-lg">
             <h3 className="text-align-center">Search Archives</h3>
@@ -188,6 +207,18 @@ class NytSearch extends Component {
             {this.props.picks && this.listPicks(this.props.picks) }
           </Col>
         </Row>
+
+        <ul className="test-fb">
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+          <li>5</li>
+          <li>6</li>
+          <li>7</li>
+          <li>8</li>
+          <li>9</li>
+        </ul>
       </div>
     );
   }
@@ -195,7 +226,8 @@ class NytSearch extends Component {
 
 const mapStateToProps = state => {
   return {
-    articles: state.reducers.toJSON().articles
+    articles: state.reducers.toJSON().articles,
+    error: state.reducers.toJSON().error
   };
 };
 
