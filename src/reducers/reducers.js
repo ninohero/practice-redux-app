@@ -16,10 +16,17 @@ export default (state = initialState, action) => {
     case types.GET_CRITICS_REQUEST:
       return state;
     case types.GET_CRITICS_SUCCESS:
-      return state.setIn(['critics'], action.payload.response);
+      return state.setIn(['critics'], action.payload.results);
     case types.GET_CRITICS_FAILURE:
       const error = action.payload.response && action.payload.response.data && action.payload.response.data.fault ? 'GetCritics Error: ' + action.payload.response.data.fault.faultstring : 'General non-specific error';
       return state.setIn(['error'], error);
+    case types.GET_PICKS_REQUEST:
+      return state;
+    case types.GET_PICKS_SUCCESS:
+      return state.setIn(['picks'], action.payload.results);
+    case types.GET_PICKS_FAILURE:
+      const error2 = action.payload.response && action.payload.response.data && action.payload.response.data.fault ? 'GetCritics Error: ' + action.payload.response.data.fault.faultstring : 'General non-specific error';
+      return state.setIn(['error'], error2);
     case types.CLEAR_ERRORS:
       return state.delete('error');
     default:

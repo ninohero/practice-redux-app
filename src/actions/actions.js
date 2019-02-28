@@ -81,7 +81,7 @@ export const getMovieCritics = (params) => {
     dispatch(getMovieCriticsRequest());
 
     // /critics/all.json
-    axios.get(uri + 'svc/movies/v2/critics/all.json',{
+    axios.get(uri + 'svc/movies/v2/critics/all.json?api-key=' + key,{
       ...params
     })
       .then(res => {
@@ -117,9 +117,7 @@ export const getPicks = (params) => {
     dispatch(getPicksRequest());
 
     // /2019/1 => year, month?
-    axios.get(uri + '/svc/movies/v2/' + params.join('/') + '.json?api-key=' + key,{
-      ...params
-    })
+    axios.get(uri + '/svc/movies/v2/reviews/picks.json?api-key=' + key)
       .then(res => {
         dispatch(getPicksSuccess(res.data));
       })
@@ -130,18 +128,18 @@ export const getPicks = (params) => {
 };
 
 const getPicksRequest = () => ({
-  type: types.GET_MOVIE_PICKS_REQUEST
+  type: types.GET_PICKS_REQUEST
 });
 
 const getPicksSuccess = results => ({
-  type: types.GET_MOVIE_PICKS_SUCCESS,
+  type: types.GET_PICKS_SUCCESS,
   payload: {
     ...results
   }
 });
 
 const getPicksFailure = err => ({
-  type: types.GET_MOVIE_PICKS_FAILURE,
+  type: types.GET_PICKS_FAILURE,
   payload: {
     ...err
   }
